@@ -18,12 +18,13 @@ Cisco NX-OS
 Cisco ASA
 Cisco FTD
 
+## Screenshots
 
->Dashboard
+### Dashboard
 ![Dashboard](screenshots/dashboard.png)
 ![Dashboard](screenshots/dashboard1.png)
 
->PDF Report
+### PDF Report
 ![PDF Report](screenshots/pdf-report.png)
 
 Installation
