@@ -1,28 +1,43 @@
-## 🚀 New in v1.0.0
 
-- Cisco Show Version Parser
-- Automatic Product Detection
-- Automatic Version Extraction
-- IOS XE / IOS / NX-OS / ASA / FTD Support
-- Improved UI
-- PDF Report Export
-
+![Version](https://img.shields.io/badge/version-v1.0.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Python](https://img.shields.io/badge/python-3.10+-yellow)
 
 # NetPatchRadar Cisco
 
 Cisco Software Vulnerability Assessment Tool powered by Cisco OpenVuln API.
 
-NetPatchRadar Cisco helps network engineers quickly identify software vulnerabilities, review risk levels, and generate security assessment reports for Cisco platforms.
-
+![Dashboard](screenshots/dashboard.png)
 ---
 
-## Prerequisites
+## What is NetPatchRadar Cisco?
 
-A Cisco Developer account is required to obtain OpenVuln API credentials.
+NetPatchRadar Cisco is a vulnerability assessment tool for Cisco network devices powered by the Cisco OpenVuln API.
 
-Register and request API access through the Cisco Developer Portal.
+The tool automatically detects Cisco product families and software versions, retrieves related security advisories, ranks vulnerabilities by CVSS severity, and generates professional PDF assessment reports.
 
-Cisco Developer Portal: https://developer.cisco.com
+Supported Platforms:
+
+- Cisco IOS XE
+- Cisco IOS
+- Cisco NX-OS
+- Cisco ASA
+- Cisco FTD
+---
+
+## Use Case
+
+Network engineers often need to determine whether a Cisco software version contains known vulnerabilities.
+
+Traditionally this requires:
+
+- Searching Cisco Security Advisories manually
+- Identifying the correct product family
+- Comparing software versions
+- Reviewing multiple CVEs individually
+
+NetPatchRadar Cisco automates this workflow and provides results within seconds.
+---
 
 ## Features
 
@@ -36,21 +51,7 @@ Cisco Developer Portal: https://developer.cisco.com
 - Automatic Version Detection
 ---
 
-## Supported Products
-
-- Cisco IOS XE
-- Cisco IOS
-- Cisco NX-OS
-- Cisco ASA
-- Cisco FTD
-
----
-
 ## Screenshots
-
-### Dashboard
-
-![Dashboard](screenshots/dashboard.png)
 
 ### Example-1
 ![Example-1](screenshots/dashboard1.png)
@@ -72,6 +73,11 @@ Cisco Developer Portal: https://developer.cisco.com
 git clone https://github.com/southK0rean/NetPatchRadar-Cisco.git
 
 cd NetPatchRadar-Cisco
+
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
 
 pip install -r requirements.txt
 ```
@@ -152,11 +158,56 @@ Alternative Workflow
 - Suggested Release Analysis
 - Configuration Parsing
 - Multi-Vendor Support
-
 ---
 
+## Prerequisites & Security
+
+A Cisco Developer account is required to obtain OpenVuln API credentials.
+
+Register and request API access through the Cisco Developer Portal.
+
+NetPatchRadar Cisco does not store Cisco API credentials.
+
+Credentials are loaded from environment variables and are never written to disk, logs, or exported reports.
+
+Required variables:
+
+- CLIENT_ID
+- CLIENT_SECRET
+
+Cisco Developer Portal: <https://developer.cisco.com>
+---
+
+## Architecture
+
+```text
+User
+ │
+ ▼
+Flask Web UI
+ │
+ ▼
+Version Parser
+ │
+ ▼
+Cisco OpenVuln API
+ │
+ ▼
+Assessment Engine
+ │
+ ▼
+PDF Report Generator
+```
+
+---
 ## Disclaimer
 
 This project is an independent tool and is not affiliated with Cisco Systems.
 
 Cisco trademarks and product names belong to Cisco Systems, Inc.
+---
+
+## License
+
+This project is licensed under the MIT License.
+See the LICENSE file for details.
