@@ -20,19 +20,70 @@
             {% endfor %}
         </select>
 
-        <label>소프트웨어 버전</label>
+        <label>소프트웨어 버전(직접 입력)</label>
         <input type="text" name="version" value="{{ version }}" placeholder="예: 17.9.4">
+        <div class="divider">
+            <span>또는</span>
+        </div>
+        <label for="show_version_text">Paste Cisco show version output</label>
+         <textarea
+          id="show_version_text"
+          name="show_version_text"
+          class="show-version-box"
+          placeholder="Paste show version output here...">{{ show_version_text or "" }}</textarea>
 
+        {% if parser_result and parser_result.detected %}
+          <div class="detected-box">
+            <div>
+              <span class="detected-label">Detected Product</span>
+              <strong>{{ parser_result.product | upper }}</strong>
+            </div>
+
+            <div>
+              <span class="detected-label">Detected Version</span>
+              <strong>{{ parser_result.version }}</strong>
+            </div>
+
+            <div>
+              <span class="detected-label">Input Source</span>
+              <strong>{{ input_source }}</strong>
+            </div>
+          </div>
+        {% endif %}
+          <div class="info-box">
+             ℹ️ Tip: show version 전체 출력을 붙여넣으면 제품군과 버전이 자동으로 감지됩니다.
+          </div>
         <button type="submit">조회하기</button>
     </form>
+    <div class="tips-panel">
+    <div class="tips-left">
+        <h3>💡 사용 팁</h3>
+
+        <ul>
+            <li>show version 출력을 붙여넣으면 제품군과 버전이 자동으로 추출됩니다.</li>
+            <li>버전을 직접 입력해도 조회 가능합니다.</li>
+        </ul>
+    </div>
+
+    <div class="tips-right">
+        <h3>지원 제품군</h3>
+
+        <div class="badges">
+            <span>IOS XE</span>
+            <span>IOS</span>
+            <span>NX-OS</span>
+            <span>ASA</span>
+            <span>FTD</span>
+        </div>
+    </div>
+
+    </div>
      {% if advisories %}
-        <div class="pdf-download-box">
-            <form method="POST" action="/report/pdf">
+        <div class="pdf-section">
+            <form action="/download_pdf" method="post">
                 <input type="hidden" name="product_type" value="{{ selected_product }}">
                 <input type="hidden" name="version" value="{{ version }}">
-                <button type="submit" class="pdf-button">
-                                📄 PDF 보고서 다운로드
-                </button>
+                <button type="submit" class="pdf-button">📄 Export PDF Report</button>
             </form>
         </div>
     {% endif %}

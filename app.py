@@ -3,6 +3,7 @@ from collections import Counter
 from flask import Flask, render_template, request, send_file
 from pdf_report import generate_pdf_report
 from cisco_openvuln import search_advisories
+from version_parser import parse_show_version
 
 app = Flask(__name__)
 
@@ -78,12 +79,34 @@ def index():
     error = None
     upgrade_recommendation = None
     eox_info = None
+
     selected_product = "iosxe"
     version = ""
+    show_version_text = ""
+
+    parser_result = {}
+    input_source = None
 
     if request.method == "POST":
         selected_product = request.form.get("product_type", "iosxe")
         version = request.form.get("version", "").strip()
+        show_version_text = request.form.get("show_version_text", "").strip()
+
+        parser_result = {}
+
+        if show_version_text:
+           parser_result = parse_show_version(show_version_text)
+
+           if parser_result.get("product"):
+               selected_product = parser_result["product"]
+
+           if parser_result.get("version"):
+               version = parser_result["version"]
+           
+           input_source = "show version"
+        
+        else:
+            input_source = "manual"
 
         if not version:
             error = "버전을 입력해주세요. 예: 17.9.4"
@@ -99,7 +122,6 @@ def index():
                 
                 upgrade_recommendation = build_upgrade_recommendation(advisories)
                 eox_info = build_eox_info(selected_product, version)
-
                 summary = build_summary(advisories)
 
             except Exception as e:
@@ -115,6 +137,9 @@ def index():
         advisories=advisories,
         summary=summary,
         error=error,
+        parser_result=parser_result,
+        input_source=input_source,
+        show_version_text=show_version_text,
     )
 
 @app.route("/report/pdf", methods=["POST"])
@@ -147,6 +172,6 @@ def report_pdf():
         download_name=f"netpatchradar-cisco-{selected_product}-{version}.pdf",
         mimetype="application/pdf",
     )
-    
+
 if __name__ == "__main__":
     app.run(debug=True)
