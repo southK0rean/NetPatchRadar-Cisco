@@ -23,6 +23,7 @@ Traditionally this requires:
 - Reviewing multiple CVEs individually
 
 NetPatchRadar Cisco automates this workflow and provides results within seconds.
+
 ---
 
 ## Features
