@@ -1,3 +1,13 @@
+## 🚀 New in v1.0.0
+
+- Cisco Show Version Parser
+- Automatic Product Detection
+- Automatic Version Extraction
+- IOS XE / IOS / NX-OS / ASA / FTD Support
+- Improved UI
+- PDF Report Export
+
+
 # NetPatchRadar Cisco
 
 Cisco Software Vulnerability Assessment Tool powered by Cisco OpenVuln API.
@@ -21,7 +31,9 @@ Cisco Developer Portal: https://developer.cisco.com
 - Severity Dashboard
 - Upgrade Recommendation Engine
 - PDF Security Report Export
-
+- Show Version Parser
+- Automatic Product Detection
+- Automatic Version Detection
 ---
 
 ## Supported Products
@@ -102,6 +114,14 @@ http://127.0.0.1:5000
 5. Review recommended upgrade version
 6. Export PDF security report
 
+Alternative Workflow
+
+1. Paste Cisco "show version" output
+2. Product and version are detected automatically
+3. Run vulnerability assessment
+4. Review Severity Dashboard
+5. Review recommended upgrade version
+6. Export PDF security report
 ---
 
 ## Sample Output
@@ -119,15 +139,18 @@ http://127.0.0.1:5000
 ### v1.0
 
 - Cisco OpenVuln Integration
-- PDF Report Export
+- Severity Dashboard
 - Upgrade Recommendation
+- PDF Report Export
+- Show Version Parser
+- Automatic Product Detection
+- Automatic Version Detection
 
 ### Future Plans
 
 - Cisco EoX / Lifecycle Integration
 - Suggested Release Analysis
 - Configuration Parsing
-- "show version" Auto Detection
 - Multi-Vendor Support
 
 ---
