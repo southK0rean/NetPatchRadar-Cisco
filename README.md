@@ -7,22 +7,8 @@
 
 Cisco Software Vulnerability Assessment Tool powered by Cisco OpenVuln API.
 
-![Dashboard](screenshots/dashboard.png)
----
+NetPatchRadar Cisco helps network engineers quickly identify software vulnerabilities, review risk levels, and generate security assessment reports for Cisco platforms.
 
-## What is NetPatchRadar Cisco?
-
-NetPatchRadar Cisco is a vulnerability assessment tool for Cisco network devices powered by the Cisco OpenVuln API.
-
-The tool automatically detects Cisco product families and software versions, retrieves related security advisories, ranks vulnerabilities by CVSS severity, and generates professional PDF assessment reports.
-
-Supported Platforms:
-
-- Cisco IOS XE
-- Cisco IOS
-- Cisco NX-OS
-- Cisco ASA
-- Cisco FTD
 ---
 
 ## Use Case
@@ -205,9 +191,3 @@ PDF Report Generator
 This project is an independent tool and is not affiliated with Cisco Systems.
 
 Cisco trademarks and product names belong to Cisco Systems, Inc.
----
-
-## License
-
-This project is licensed under the MIT License.
-See the LICENSE file for details.
