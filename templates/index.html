@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>NetPatchRadar Cisco</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>NetPatchRadar Cisco</h1>
+    <p class="subtitle">Cisco 버전 기반 취약점 조회 도구</p>
+
+    <form method="POST" class="search-box">
+        <label>제품군</label>
+        <select name="product_type">
+            {% for key, name in product_types.items() %}
+                <option value="{{ key }}" {% if key == selected_product %}selected{% endif %}>
+                    {{ name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label>소프트웨어 버전</label>
+        <input type="text" name="version" value="{{ version }}" placeholder="예: 17.9.4">
+
+        <button type="submit">조회하기</button>
+    </form>
+     {% if advisories %}
+        <div class="pdf-download-box">
+            <form method="POST" action="/report/pdf">
+                <input type="hidden" name="product_type" value="{{ selected_product }}">
+                <input type="hidden" name="version" value="{{ version }}">
+                <button type="submit" class="pdf-button">
+                                📄 PDF 보고서 다운로드
+                </button>
+            </form>
+        </div>
+    {% endif %}
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    {% if advisories %}
+        <h2>취약점 조회 결과: {{ advisories|length }}건</h2>
+        <div class="summary-box">
+            <div class="summary-card critical">
+                <span>Critical</span>
+                <strong>{{ summary.Critical }}</strong>
+            </div>
+            <div class="summary-card high">
+                <span>High</span>
+                <strong>{{ summary.High }}</strong>
+            </div>
+            <div class="summary-card medium">
+                <span>Medium</span>
+                <strong>{{ summary.Medium }}</strong>
+            </div>
+            <div class="summary-card low">
+                <span>Low</span>
+                <strong>{{ summary.Low }}</strong>
+            </div>
+        </div>  
+        
+        <div class="upgrade-card">
+            <h3>🚀 Upgrade Recommendation</h3>
+            <p>
+                Recommended Version:
+                <strong>{{ upgrade_recommendation.recommended }}</strong>
+            </p>
+            <ul>
+                {% for version, count in upgrade_recommendation.candidates %}
+                <li>{{ version }} ({{ count }} fixes)</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+                {% endif %}  
+        {% if eox_info %}
+          <div class="eox-card">
+              <h3>📅 EOL / EOS Status</h3>
+              <p>
+                  Product:
+                  <strong>{{ eox_info.product }}</strong>
+              </p>
+              <p>
+                  Version:
+                  <strong>{{ eox_info.version }}</strong>
+              </p>
+              <p>
+                  Status:
+                  <strong>{{ eox_info.status }}</strong>
+              </p>
+              <p>{{ eox_info.message }}</p>
+          </div>
+        {% endif %}
+        {% for adv in advisories %}
+            <div class="card">
+                <div class="card-header">
+                    <span class="severity {{ adv.sir|lower }}">{{ adv.sir }}</span>
+                    <strong>{{ adv.advisoryId }}</strong>
+                </div>
+
+                <h3>{{ adv.advisoryTitle }}</h3>
+
+                <p><b>CVSS:</b> {{ adv.cvssBaseScore }}</p>
+                <p><b>CVE:</b>
+                    {% if adv.cves %}
+                        {{ adv.cves | join(", ") }}
+                    {% else %}
+                        없음
+                    {% endif %}
+                </p>
+                <p><b>First Published:</b> {{ adv.firstPublished }}</p>
+                <p><b>Last Updated:</b> {{ adv.lastUpdated }}</p>
+
+                {% if adv.publicationUrl %}
+                    <a href="{{ adv.publicationUrl }}" target="_blank">Cisco Advisory 보기</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+        {% if request.method == "POST" and not error %}
+           <div class="no-result">해당 버전에서 조회된 Advisory가 없습니다.</div>
+        {% endif %}
+</div>
+</body>
+</html>
