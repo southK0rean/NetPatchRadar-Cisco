@@ -6,6 +6,12 @@ NetPatchRadar Cisco helps network engineers quickly identify software vulnerabil
 
 ---
 
+## Prerequisites
+
+A Cisco Developer account is required to obtain OpenVuln API credentials.
+
+Register and request API access through the Cisco Developer Portal.
+
 ## Features
 
 - Cisco OpenVuln API Integration
