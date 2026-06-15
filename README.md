@@ -12,6 +12,8 @@ A Cisco Developer account is required to obtain OpenVuln API credentials.
 
 Register and request API access through the Cisco Developer Portal.
 
+Cisco Developer Portal: https://developer.cisco.com
+
 ## Features
 
 - Cisco OpenVuln API Integration
