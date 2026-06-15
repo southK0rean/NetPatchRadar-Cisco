@@ -20,11 +20,11 @@ Cisco FTD
 Screenshots
 Dashboard
 
-(Add screenshot here)
+![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/dashboard1.png)
 
 PDF Report
-
-(Add screenshot here)
+![PDF Report](screenshots/pdf-report.png)
 
 Installation
 git clone https://github.com/your-github-id/netpatchradar-cisco.git
