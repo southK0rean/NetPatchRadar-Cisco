@@ -28,7 +28,7 @@ Cisco FTD
 ![PDF Report](screenshots/pdf-report.png)
 
 Installation
-git clone https://github.com/your-github-id/netpatchradar-cisco.git
+git clone https://github.com/southK0rean/netpatchradar-cisco.git
 
 cd netpatchradar-cisco
 
