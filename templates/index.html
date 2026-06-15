@@ -80,7 +80,7 @@
     </div>
      {% if advisories %}
         <div class="pdf-section">
-            <form action="/download_pdf" method="post">
+            <form action="{{ url_for('download_pdf') }}" method="post">
                 <input type="hidden" name="product_type" value="{{ selected_product }}">
                 <input type="hidden" name="version" value="{{ version }}">
                 <button type="submit" class="pdf-button">📄 Export PDF Report</button>

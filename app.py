@@ -143,7 +143,7 @@ def index():
     )
 
 @app.route("/report/pdf", methods=["POST"])
-def report_pdf():
+def download_pdf():
     selected_product = request.form.get("product_type", "iosxe")
     version = request.form.get("version", "").strip()
 

@@ -40,6 +40,7 @@ Cisco Developer Portal: https://developer.cisco.com
 
 ![Dashboard](screenshots/dashboard.png)
 ![Dashboard](screenshots/dashboard1.png)
+![Dashboard](screenshots/dashboard2.png)
 
 ### PDF Report
 
