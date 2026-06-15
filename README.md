@@ -45,8 +45,10 @@ Cisco API credentials can be obtained from the Cisco Developer Portal.
 Run
 python app.py
 
-Then open:
+Open your browser and navigate to:
+http://127.0.0.1:5000
 
+Then open:
 http://127.0.0.1:5000
 Example Workflow
 Select Cisco product type
