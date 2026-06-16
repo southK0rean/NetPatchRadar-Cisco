@@ -49,8 +49,20 @@ NetPatchRadar Cisco automates this workflow and provides results within seconds.
 ![Example-2](screenshots/dashboard4.png)
 
 ### PDF Report
-
 ![PDF Report](screenshots/pdf-report.png)
+
+---
+
+## Demo
+
+### Manual Version Input
+![Manual Input](assets/show1.gif)
+
+### Show Version Parser
+![Show Version Parser](assets/show2.gif)
+
+### PDF Report Export
+![PDF Export](assets/show3.gif)
 
 ---
 

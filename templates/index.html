@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>NetPatchRadar Cisco</title>
@@ -8,10 +8,10 @@
 <body>
 <div class="container">
     <h1>NetPatchRadar Cisco</h1>
-    <p class="subtitle">Cisco 버전 기반 취약점 조회 도구</p>
+    <p class="subtitle">Cisco Software Vulnerability Assessment Tool</p>
 
     <form method="POST" class="search-box">
-        <label>제품군</label>
+        <label>Product</label>
         <select name="product_type">
             {% for key, name in product_types.items() %}
                 <option value="{{ key }}" {% if key == selected_product %}selected{% endif %}>
@@ -20,17 +20,17 @@
             {% endfor %}
         </select>
 
-        <label>소프트웨어 버전(직접 입력)</label>
-        <input type="text" name="version" value="{{ version }}" placeholder="예: 17.9.4">
+        <label>Software Version (Manual Input)</label>
+        <input type="text" name="version" value="{{ version }}" placeholder="e.g. 17.9.4">
         <div class="divider">
-            <span>또는</span>
+            <span>OR</span>
         </div>
-        <label for="show_version_text">Paste Cisco show version output</label>
+        <label for="show_version_text">Paste Cisco "show version" output</label>
          <textarea
           id="show_version_text"
           name="show_version_text"
           class="show-version-box"
-          placeholder="Paste show version output here...">{{ show_version_text or "" }}</textarea>
+          placeholder="Paste Cisco show Version Output">{{ show_version_text or "" }}</textarea>
 
         {% if parser_result and parser_result.detected %}
           <div class="detected-box">
@@ -51,22 +51,22 @@
           </div>
         {% endif %}
           <div class="info-box">
-             ℹ️ Tip: show version 전체 출력을 붙여넣으면 제품군과 버전이 자동으로 감지됩니다.
+             ℹ️ Tip: When both manual input and show version output are provided, the detected version from the show version output takes precedence.
           </div>
-        <button type="submit">조회하기</button>
+        <button type="submit">Assess Vulnerabilities</button>
     </form>
     <div class="tips-panel">
     <div class="tips-left">
-        <h3>💡 사용 팁</h3>
+        <h3>💡 Tips</h3>
 
         <ul>
-            <li>show version 출력을 붙여넣으면 제품군과 버전이 자동으로 추출됩니다.</li>
-            <li>버전을 직접 입력해도 조회 가능합니다.</li>
+            <li>Paste full Cisco show version output to automatically detect product and software version.</li>
+            <li>Manual software version input is also supported.</li>
         </ul>
     </div>
 
     <div class="tips-right">
-        <h3>지원 제품군</h3>
+        <h3>Supported Platforms</h3>
 
         <div class="badges">
             <span>IOS XE</span>
@@ -92,7 +92,7 @@
     {% endif %}
 
     {% if advisories %}
-        <h2>취약점 조회 결과: {{ advisories|length }}건</h2>
+        <h2>Vulnerability Assessment Results: {{ advisories|length }}case</h2>
         <div class="summary-box">
             <div class="summary-card critical">
                 <span>Critical</span>
@@ -158,19 +158,19 @@
                     {% if adv.cves %}
                         {{ adv.cves | join(", ") }}
                     {% else %}
-                        없음
+                        None
                     {% endif %}
                 </p>
                 <p><b>First Published:</b> {{ adv.firstPublished }}</p>
                 <p><b>Last Updated:</b> {{ adv.lastUpdated }}</p>
 
                 {% if adv.publicationUrl %}
-                    <a href="{{ adv.publicationUrl }}" target="_blank">Cisco Advisory 보기</a>
+                    <a href="{{ adv.publicationUrl }}" target="_blank">View Cisco Advisory</a>
                 {% endif %}
             </div>
         {% endfor %}
-        {% if request.method == "POST" and not error %}
-           <div class="no-result">해당 버전에서 조회된 Advisory가 없습니다.</div>
+        {% if request.method == "POST" and not error and not advisories %}
+           <div class="no-result">No advisory was found for this version.</div>
         {% endif %}
 </div>
 </body>
