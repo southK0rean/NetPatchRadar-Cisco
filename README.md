@@ -36,20 +36,13 @@ NetPatchRadar Cisco automates this workflow and provides results within seconds.
 - Show Version Parser
 - Automatic Product Detection
 - Automatic Version Detection
+
 ---
 
 ## Screenshots
 
 ### Example-1
 ![Example-1](screenshots/dashboard1.png)
-![Example-1](screenshots/dashboard2.png)
-
-### Example-2
-![Example-2](screenshots/dashboard3.png)
-![Example-2](screenshots/dashboard4.png)
-
-### PDF Report
-![PDF Report](screenshots/pdf-report.png)
 
 ---
 
