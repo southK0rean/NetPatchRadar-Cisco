@@ -42,7 +42,7 @@ NetPatchRadar Cisco automates this workflow and provides results within seconds.
 ## Screenshots
 
 ### Example
-![Example](screenshots/Newdashboard1.png)
+![Example](screenshots/Newdashboard.png)
 
 ---
 
